@@ -7,7 +7,8 @@
 ## the conf dict stores all relevant config parameters
 
 conf={}
-conf['model'] = "climate2_2015_7.txt.2gram.model"
+conf['model'] = "climate2_2015_7.txt.2gram.small.model" # default dummy model
+#conf['model'] = "climate2_2015_7.txt.2gram.model"
 
 
 

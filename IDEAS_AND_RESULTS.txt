@@ -1,0 +1,24 @@
+
+Copy our ontology learning with word2vec
+    Step 1: copy term extraction process
+    Step 2: do taxonomy extraction
+
+
+Implementation:
+    a) basically copy what the our ontology learning does.
+        - starting from a seed concept, 3 iterations where 25 term candidates are generated
+        - manual validation of term candidates, evaluations are saved and re-used (via sqlite3 database table)
+
+TODO: - do relation type detection algorithm with word2vec -- in a similar fashion as word2vec is-A relation extraction    
+      - compare to existing approaches (eg the one done in Wohlgenannt's PhD thesis / http://eprints.weblyzard.com/18/1/weichselbraun2010.pdf )
+
+Results:
+    - taxonomy extraction: typical tradeoff between precision and recall -- if accepting a lower threshold 
+        and more suggestions (in the list)
+    - taxonomy extraction: direction of relation in isA often not ok. 
+        Thoughts: not good enough by itself, but combined with other existing taxonomy methods?
+        Thoughts: Well suited to extract unlabeled relations 
+
+    - term extraction: if no stemming / lemmatization -- often singlar and plural of same term suggested.
+        general problem (but expected): generated terms are very close (often too close?) to seed terms
+

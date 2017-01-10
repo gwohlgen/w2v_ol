@@ -1,0 +1,57 @@
+
+Dear user,
+
+here you find most of the code and results from the ISWC 2016 poster submission
+"Using word2vec to Build a Simple Ontology Learning System -- Gerhard Wohlgenannt and Filip Minic".
+
+
+src:    contains the source code used.
+        run_ontology_extension.py -- to start the word2vec based ontology learning tasks
+        db.py -- contains most of the functions
+
+
+data:
+        The sqlite3 database named "our.db" contains the results from the concept candidate generation.
+        The columns are as follows:
+                term   .. the term suggested by word2vec
+                corpus .. which corpus/word2vec model was used?
+                step   .. which of the three iteration of ontology extension
+                relevant .. was the term judged as relevant by the domain experts
+
+
+        Furthermore the directory contains the two seed ontologies for the unigram and bigram case.
+        Other results, eg. the hypernym pairs, are also found here.
+        
+        We include a word2vec model, which you can use to start your experiments, but for more in depth usage you 
+        will want to use your own models. The provide model is a small one, in order to stay in the 100MB size limit of github.com
+
+
+----------------------------------------
+
+USAGE:
+
+    step 1) configuration in config.py
+        a) copy your word2vec model into data/models
+        b) set the name of your word2vec model in 'config["model"]'
+        c) set up seed terms (for example 2) for your ontology <-> this depends on whether using a bigram or unigram model, see next step
+        d) If you use a bigram word2vec model --> use the according configs in config.py for
+            conf['seedfn'] 
+            conf['num_taxomy_best']
+            conf['sim_threshold']
+        
+
+    step 2) 
+        a) python run_ontology_extension.py
+            this collects new terms for your ontology 
+            manually validate the terms after every ontology extension step (aka call "python run_ontology_extension")
+        
+            --> go into "data/to_check" and edit the "...CHECK_ME" file -- remove all terms from the file that are not relevant to the domain
+            --> when done, rename the file to "...NEW" (that is replace CHECK_ME with NEW) 
+        b) got back to step a) -- after 3 iterations (configurable) the process finished
+
+            --> after the 3rd iteration the system automatically tries to detected hypernymy relations between the terms using word2vec (analogy feature)
+                this is very experimental, precision is not very high
+
+    step 3) you can run "python analyse_db.py" to get acurracy numbers for the term detection service (according to manual evaluations)
+        
+

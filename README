@@ -24,6 +24,7 @@ data:
         
         We include a word2vec model, which you can use to start your experiments, but for more in depth usage you 
         will want to use your own models. The provide model is a small one, in order to stay in the 100MB size limit of github.com
+        The dummy model is found at data/models/climate2_2015_7.txt.2gram.small.model
 
 
 ----------------------------------------
